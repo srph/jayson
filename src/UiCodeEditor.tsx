@@ -6,7 +6,6 @@ import 'codemirror/theme/monokai.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/htmlmixed/htmlmixed'
 import { Controlled as CodeMirror } from 'react-codemirror2'
-import * as pretty from 'pretty'
 
 interface UiJsonEditorProps {
   value: string
@@ -55,26 +54,26 @@ export default class UiJsonEditor extends React.Component<UiJsonEditorProps, voi
     this.props.onChange && this.props.onChange(value)
   }
 
-  handlePaste = (editor, evt) => {
-    setTimeout(() => {
-      let formatted
+  // handlePaste = (editor, evt) => {
+  //   setTimeout(() => {
+  //     let formatted
 
-      try {
-        switch (this.props.language) {
-          case 'javascript':
-            formatted = JSON.stringify(JSON.parse(this.props.value), null, 2)
-            break
-          case 'html':
-            formatted = pretty(this.props.value)
-            break
-          default:
-            formatted = this.props.value
-        }
-      } catch (e) {
-        return
-      }
+  //     try {
+  //       switch (this.props.language) {
+  //         case 'javascript':
+  //           formatted = JSON.stringify(JSON.parse(this.props.value), null, 2)
+  //           break
+  //         case 'html':
+  //           formatted = pretty(this.props.value)
+  //           break
+  //         default:
+  //           formatted = this.props.value
+  //       }
+  //     } catch (e) {
+  //       return
+  //     }
 
-      this.props.onChange && this.props.onChange(formatted)
-    }, 500)
-  }
+  //     this.props.onChange && this.props.onChange(formatted)
+  //   }, 500)
+  // }
 }

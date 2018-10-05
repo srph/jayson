@@ -6,11 +6,6 @@
   "dependencies": {
     "codemirror": "5.40.2",
     "copy-text-to-clipboard": "1.0.4",
-    "downshift": "2.2.3",
-    "immer": "1.7.2",
-    "json-beautify": "1.0.1",
-    "lodash.get": "4.4.2",
-    "pretty": "2.0.0",
     "react": "^16.2.0",
     "react-codemirror2": "5.1.0",
     "react-dom": "^16.2.0",
