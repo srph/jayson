@@ -8,7 +8,7 @@ interface UiFieldProps {
   disabled?: boolean
   error?: string
   tooltip?: string
-  action?: JSX.Element
+  actions?: JSX.Element | JSX.Element[]
   wrapperRef?: (c: JSX.Element) => void
 }
 
@@ -45,17 +45,30 @@ ui.Tooltip = styled.div`
   font-size: 10px;
   font-style: italic;
 `
+ui.Actions = styled.div`
+  display: flex;
+  align-items: center;
+`
+ui.ActionsItem = styled.div`
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+`
 
 export default function Input(props: UiFieldProps) {
+  const actions = props.actions ? (Array.isArray(props.actions) ? props.actions : [props.actions]) : []
   return (
     <ui.Field innerRef={props.wrapperRef} disabled={props.disabled}>
       <ui.Label>
         <span>{props.label}</span>
         {props.error && Boolean(props.error.length) && <ui.LabelError>Invalid JSON!</ui.LabelError>}
-        {props.action &&
-          React.cloneElement(props.action, {
-            disabled: props.disabled
-          })}
+        {Boolean(actions.length) && (
+          <ui.Actions>
+            {actions.map((action, i) => (
+              <ui.ActionsItem>{React.cloneElement(action, { disabled: props.disabled })}</ui.ActionsItem>
+            ))}
+          </ui.Actions>
+        )}
       </ui.Label>
       {React.cloneElement(props.children, {
         disabled: props.disabled

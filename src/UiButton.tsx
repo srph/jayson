@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import s from './styles'
 
 const ui = {}
@@ -27,12 +27,34 @@ ui.Button = styled.button`
     cursor: not-allowed;
   }
 
-  &:not(:disabled):hover,
-  :focus {
-    transform: translateY(-2px);
-    box-shadow: ${s['drop-shadow-lower']};
-  }
+  ${props =>
+    props.preset !== 'clear' &&
+    css`
+    &:not(:disabled):hover,
+    :focus {
+      transform: translateY(-2px);
+      box-shadow: ${s['drop-shadow-lower']};
+    }
+  `}
+
+  ${props =>
+    props.preset === 'clear' &&
+    css`
+    border: 0;
+    box-shadow: initial;
+  `}
+
+  ${props =>
+    props.preset === 'primary' &&
+    css`
+    color: ${s['color-white']};
+    background: ${s['color-lavender']};
+  `}
 `
+
+interface UiButtonProps {
+  preset: 'clear' | 'primary' | ''
+}
 
 export default function UiButton(props: any) {
   return <ui.Button {...props} />
