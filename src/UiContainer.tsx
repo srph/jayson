@@ -7,6 +7,7 @@ ui.Wrapper = styled.div`
   font-family: ${s['font-family']};
   font-size: ${s['font-size']};
   background: ${s['color-light-silver']};
+  min-height: 100vh;
 `
 
 ui.Container = styled.div`

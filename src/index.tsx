@@ -41,7 +41,11 @@ class App extends React.Component<void, AppState> {
 
         {!this.state.output.length && (
           <UiTransitionFadeIn>
-            <UiField label="Input">
+            <UiField
+              label="Input"
+              actions={
+                <UiButton onClick={this.handleReset}>{this.state.mode === Mode.Encode ? 'Encode' : 'Decode'}</UiButton>
+              }>
               <UiCodeEditor
                 value={this.state.input}
                 onChange={this.handleInputChange}
