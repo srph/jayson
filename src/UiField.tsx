@@ -65,7 +65,9 @@ export default function Input(props: UiFieldProps) {
         {Boolean(actions.length) && (
           <ui.Actions>
             {actions.map((action, i) => (
-              <ui.ActionsItem>{React.cloneElement(action, { disabled: props.disabled })}</ui.ActionsItem>
+              <ui.ActionsItem>
+                {React.cloneElement(action, { disabled: action.props.disabled || props.disabled })}
+              </ui.ActionsItem>
             ))}
           </ui.Actions>
         )}
