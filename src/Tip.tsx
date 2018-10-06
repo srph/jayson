@@ -33,7 +33,7 @@ interface TipState {
 }
 
 const tips = [
-  'Updating the JSON input resets the entire process.',
+  'Better done than perfect.',
   'Compass websites are not supposed to be updated through JSON.',
   "Don't forget to take a short break every after task.",
   "Always, always backup a website's JSON settings before making changes.",

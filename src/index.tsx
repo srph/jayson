@@ -118,8 +118,9 @@ class App extends React.Component<void, AppState> {
     if (this.state.mode === Mode.Encode) {
       return JSON.stringify(input).replace(/(^\")|(\"$)/g, '')
     }
+
     try {
-      return JSON.parse(`"${input}"`)
+      return input.replace(/\\n|\\r/g, '').replace(/\\"/g, '"')
     } catch (e) {
       return input
     }
