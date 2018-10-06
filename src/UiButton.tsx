@@ -54,6 +54,7 @@ ui.Button = styled.button`
 
 interface UiButtonProps {
   preset: 'clear' | 'primary' | ''
+  disabled?: boolean
 }
 
 export default function UiButton(props: any) {

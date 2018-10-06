@@ -44,7 +44,9 @@ class App extends React.Component<void, AppState> {
             <UiField
               label="Input"
               actions={
-                <UiButton onClick={this.handleReset}>{this.state.mode === Mode.Encode ? 'Encode' : 'Decode'}</UiButton>
+                <UiButton onClick={this.handleFormat} disabled={!this.state.input.length}>
+                  {this.state.mode === Mode.Encode ? 'Encode' : 'Decode'}
+                </UiButton>
               }>
               <UiCodeEditor
                 value={this.state.input}
@@ -94,36 +96,33 @@ class App extends React.Component<void, AppState> {
   }
 
   handleInputChange = (input: string) => {
-    this.setState(
-      {
-        input
-      },
-      () => {
-        clearTimeout(this.timeout)
-
-        this.timeout = setTimeout(() => {
-          let output = ''
-
-          if (this.state.mode === Mode.Encode) {
-            output = JSON.stringify(this.state.input).replace(/(^\")|(\"$)/g, '')
-          } else {
-            try {
-              output = JSON.parse(`"${this.state.input}"`)
-            } catch (e) {
-              output = this.state.input
-            }
-          }
-
-          this.setState({
-            output
-          })
-        }, 500)
-      }
-    )
+    this.setState({
+      input
+    })
   }
 
-  handleInputPaste = () => {
-    this.outputField.scrollIntoView(false)
+  handleInputPaste = (input: string) => {
+    this.setState({
+      input,
+      output: this.getFormat(input)
+    })
+  }
+
+  handleFormat = () => {
+    this.setState({
+      output: this.getFormat(this.state.input)
+    })
+  }
+
+  getFormat(input: string) {
+    if (this.state.mode === Mode.Encode) {
+      return JSON.stringify(input).replace(/(^\")|(\"$)/g, '')
+    }
+    try {
+      return JSON.parse(`"${input}"`)
+    } catch (e) {
+      return input
+    }
   }
 }
 

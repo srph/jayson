@@ -48,7 +48,7 @@ class UiCodeEditor extends React.Component<UiCodeEditorProps, void> {
         <CodeMirror
           value={this.props.value}
           onBeforeChange={this.handleBeforeChange}
-          // onPaste={this.handlePaste}
+          onPaste={this.handlePaste}
           options={{
             mode: this.getLanguage(),
             theme: 'monokai',
@@ -61,30 +61,19 @@ class UiCodeEditor extends React.Component<UiCodeEditorProps, void> {
   }
 
   handleBeforeChange = (editor, data, value: string) => {
+    if (this.pasted) {
+      this.pasted = false
+      this.props.onPaste && this.props.onPaste(value)
+      return
+    }
+
     this.props.onChange && this.props.onChange(value)
   }
 
   // @TODO:
   // If all contents were replaced, we'll scroll down to next field
   handlePaste = (editor, evt) => {
-    setTimeout(() => {
-      let formatted
-
-      try {
-        switch (this.props.language) {
-          case 'html':
-            formatted = pretty(this.props.value)
-            break
-          default:
-            formatted = this.props.value
-        }
-      } catch (e) {
-        return
-      }
-
-      this.props.onChange && this.props.onChange(formatted)
-      this.props.onPaste && this.props.onPaste()
-    }, 500)
+    this.pasted = true
   }
 }
 
