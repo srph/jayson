@@ -28,15 +28,17 @@ class App extends React.Component<void, AppState> {
     output: ''
   }
 
+  outputField?: JSX.Element
+
   render() {
     return (
       <UiContainer>
-        <UiHeader>Jayson Holmes</UiHeader>
+        <UiHeader>Jayson</UiHeader>
 
         <SharleenSwitchToggle value={this.state.mode} onChange={this.handleModeChange} />
 
         <UiField label="Input">
-          <UiCodeEditor value={this.state.input} onChange={this.handleInputChange} language="javascript" />
+          <UiCodeEditor value={this.state.input} onChange={this.handleInputChange} onPaste={this.handleInputPaste} />
         </UiField>
 
         {Boolean(this.state.output.length) && (
@@ -46,8 +48,9 @@ class App extends React.Component<void, AppState> {
               <CopyButton text="Output" value={this.state.output}>
                 Copy
               </CopyButton>
-            }>
-            <UiCodeEditor value={this.state.output} language="javascript" />
+            }
+            wrapperRef={c => (this.outputField = c)}>
+            <UiCodeEditor value={this.state.output} autodetectLanguage={false} />
           </UiField>
         )}
         <Tip />
@@ -91,6 +94,10 @@ class App extends React.Component<void, AppState> {
         }, 500)
       }
     )
+  }
+
+  handleInputPaste = () => {
+    this.outputField.scrollIntoView(false)
   }
 }
 

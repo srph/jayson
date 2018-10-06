@@ -20,8 +20,13 @@ ui.Wrapper = styled.div`
 export default function UiFooter() {
   return (
     <ui.Wrapper>
-      Made with 💖 by <a href="https://kierb.com">Kier Borromeo</a>. View{' '}
-      <a href="https://github.com/srph/jayson">source code</a>.
+      Made with 💖 by{' '}
+      <a href="https://kierb.com" target="_blank">
+        Kier Borromeo
+      </a>. View{' '}
+      <a href="https://github.com/srph/jayson" target="_blank">
+        source code
+      </a>.
     </ui.Wrapper>
   )
 }

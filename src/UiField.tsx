@@ -9,6 +9,7 @@ interface UiFieldProps {
   error?: string
   tooltip?: string
   action?: JSX.Element
+  wrapperRef?: (c: JSX.Element) => void
 }
 
 const ui = {}
@@ -47,7 +48,7 @@ ui.Tooltip = styled.div`
 
 export default function Input(props: UiFieldProps) {
   return (
-    <ui.Field disabled={props.disabled}>
+    <ui.Field innerRef={props.wrapperRef} disabled={props.disabled}>
       <ui.Label>
         <span>{props.label}</span>
         {props.error && Boolean(props.error.length) && <ui.LabelError>Invalid JSON!</ui.LabelError>}

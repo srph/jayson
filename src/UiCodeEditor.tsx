@@ -6,13 +6,16 @@ import 'codemirror/theme/monokai.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/htmlmixed/htmlmixed'
 import { Controlled as CodeMirror } from 'react-codemirror2'
+import * as utils from './utils'
 
-interface UiJsonEditorProps {
+interface UiCodeEditorProps {
   value: string
-  language: 'javascript' | 'html'
+  autodetectLanguage: boolean
   autoFocus?: boolean
   onAutoFormat?: (value: string) => void
   onChange?: (value: string) => void
+  onPaste?: () => void
+  innerRef?: (c: JSX.Element) => any
 }
 
 const ui = {}
@@ -20,16 +23,23 @@ ui.Wrapper = styled.div`
   font-family: ${s['font-family-monospace']};
 `
 
-export default class UiJsonEditor extends React.Component<UiJsonEditorProps, void> {
+class UiCodeEditor extends React.Component<UiCodeEditorProps, void> {
+  static defaultProps = {
+    autodetectLanguage: true
+  }
+
   pasted: boolean = false
 
-  getLanguage() {
-    switch (this.props.language) {
-      case 'html':
-        return 'htmlmixed'
-      default:
-        return this.props.language
+  getLanguage(): string {
+    if (!this.props.autodetectLanguage) {
+      return 'plaintext'
     }
+
+    if (utils.isHtml(this.props.value)) {
+      return 'htmlmixed'
+    }
+
+    return 'plaintext'
   }
 
   render() {
@@ -38,7 +48,7 @@ export default class UiJsonEditor extends React.Component<UiJsonEditorProps, voi
         <CodeMirror
           value={this.props.value}
           onBeforeChange={this.handleBeforeChange}
-          onPaste={this.handlePaste}
+          // onPaste={this.handlePaste}
           options={{
             mode: this.getLanguage(),
             theme: 'monokai',
@@ -54,26 +64,28 @@ export default class UiJsonEditor extends React.Component<UiJsonEditorProps, voi
     this.props.onChange && this.props.onChange(value)
   }
 
-  // handlePaste = (editor, evt) => {
-  //   setTimeout(() => {
-  //     let formatted
+  // @TODO:
+  // If all contents were replaced, we'll scroll down to next field
+  handlePaste = (editor, evt) => {
+    setTimeout(() => {
+      let formatted
 
-  //     try {
-  //       switch (this.props.language) {
-  //         case 'javascript':
-  //           formatted = JSON.stringify(JSON.parse(this.props.value), null, 2)
-  //           break
-  //         case 'html':
-  //           formatted = pretty(this.props.value)
-  //           break
-  //         default:
-  //           formatted = this.props.value
-  //       }
-  //     } catch (e) {
-  //       return
-  //     }
+      try {
+        switch (this.props.language) {
+          case 'html':
+            formatted = pretty(this.props.value)
+            break
+          default:
+            formatted = this.props.value
+        }
+      } catch (e) {
+        return
+      }
 
-  //     this.props.onChange && this.props.onChange(formatted)
-  //   }, 500)
-  // }
+      this.props.onChange && this.props.onChange(formatted)
+      this.props.onPaste && this.props.onPaste()
+    }, 500)
+  }
 }
+
+export default UiCodeEditor
