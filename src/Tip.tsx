@@ -32,7 +32,7 @@ interface TipState {
   activeTip: number
 }
 
-const tips = ['Better done than perfect.', "Don't forget to take a short break every now and rhen."]
+const tips = ['Better done than perfect.', "Don't forget to take a short break every now and then."]
 
 export default class Tip extends React.Component<void, TipState> {
   state: TipState = {
