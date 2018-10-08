@@ -1,10 +1,14 @@
 import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import s from './styles'
-import Tether from 'react-tether'
+import Position from './Position'
 
 const ui = {}
 ui.Wrapper = styled.div`
+  position: absolute;
+  top: ${props => props.top}px;
+  left: ${props => props.left}px;
   margin-right: 16px;
   padding: 8px;
   font-size: 10px;
@@ -12,11 +16,13 @@ ui.Wrapper = styled.div`
   color: ${s['color-white']};
   border-radius: 4px;
   font-family: ${s['font-family']};
+  pointer-events: none;
+  white-space: nowrap;
 `
 ui.Arrow = styled.div`
   position: absolute;
   top: 10px;
-  right: 8px;
+  right: -8px;
   height: 0;
   width: 0;
   border-width: 4px;
@@ -47,31 +53,31 @@ export default class UiTooltip extends React.Component<UiTooltipProps, UiTooltip
     isActive: false
   }
 
-  wrapper: HTMLElement
+  target: HTMLElement
 
   render() {
+    const { top, left } = this.state
+
     return (
-      <Tether
-        attachment="middle left"
-        constraints={[
-          {
-            to: 'scrollParent',
-            attachment: 'together'
-          }
-        ]}>
+      <div style={{ position: 'relative' }}>
         <ui.Trigger
-          ref={c => (this.wrapper = c)}
+          innerRef={c => (this.target = c)}
           onMouseEnter={this.handleMouseEnter}
           onMouseLeave={this.handleMouseLeave}>
           {this.props.children}
         </ui.Trigger>
+
         {!this.props.disabled &&
           this.state.isActive && (
-            <ui.Wrapper>
-              {this.props.text} <ui.Arrow />
-            </ui.Wrapper>
+            <Position offset={16} placement="left" target={() => this.target}>
+              {({ top, left }) => (
+                <ui.Wrapper top={top} left={left}>
+                  {this.props.text} <ui.Arrow />
+                </ui.Wrapper>
+              )}
+            </Position>
           )}
-      </Tether>
+      </div>
     )
   }
 
