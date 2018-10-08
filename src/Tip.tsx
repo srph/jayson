@@ -8,7 +8,7 @@ ui.Wrapper = styled.div`
   font-size: 12px;
   color: ${s['color-white']};
   padding: 8px;
-  background: ${s['color-lavender']};
+  background: ${s['color-dark-silver']};
   border-radius: ${s['border-radius']}px;
 `
 
@@ -22,7 +22,7 @@ ui.Label = styled.span`
   font-family: ${s['font-family-heading']};
   font-weight: 600;
   letter-spacing: 2px;
-  background: ${s['color-light-lavender']};
+  background: ${s['color-silver']};
   user-select: none;
   text-transform: uppercase;
   border-radius: ${s['border-radius']}px;
