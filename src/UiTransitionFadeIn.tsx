@@ -36,7 +36,7 @@ ui.Wrapper = styled.div`
 `
 
 interface UiTransitionFadeInProps {
-  direction: 'up' | 'down'
+  direction?: 'up' | 'down'
   children: JSX.Element
 }
 

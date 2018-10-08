@@ -11,6 +11,7 @@ import UiButton from './UiButton'
 import Tip from './Tip'
 import Footer from './Footer'
 import SharleenSwitchToggle from './SharleenSwitchToggle'
+import UiTooltip from './UiTooltip'
 
 interface AppState {
   mode: boolean
@@ -44,9 +45,11 @@ class App extends React.Component<void, AppState> {
             <UiField
               label="Input"
               actions={
-                <UiButton onClick={this.handleFormat} disabled={!this.state.input.length}>
-                  {this.state.mode === Mode.Encode ? 'Encode' : 'Decode'}
-                </UiButton>
+                <UiTooltip text="Please enter an input" disabled={Boolean(this.state.input.length)}>
+                  <UiButton onClick={this.handleFormat} disabled={!this.state.input.length}>
+                    {this.state.mode === Mode.Encode ? 'Encode' : 'Decode'}
+                  </UiButton>
+                </UiTooltip>
               }>
               <UiCodeEditor
                 value={this.state.input}
