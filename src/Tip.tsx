@@ -32,14 +32,7 @@ interface TipState {
   activeTip: number
 }
 
-const tips = [
-  'Better done than perfect.',
-  'Compass websites are not supposed to be updated through JSON.',
-  "Don't forget to take a short break every after task.",
-  "Always, always backup a website's JSON settings before making changes.",
-  'Fill one field at a time before scrolling down to the next one.',
-  'Slowly but surely. Better safe than sorry.'
-]
+const tips = ['Better done than perfect.', "Don't forget to take a short break every now and rhen."]
 
 export default class Tip extends React.Component<void, TipState> {
   state: TipState = {
