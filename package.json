@@ -36,5 +36,5 @@
     "typescript": "^2.7.2"
   },
   "keywords": [],
-  "description": "A no-refresh JSON encode-decode formatter."
+  "description": "A no-refresh JSON escape-unescape formatter."
 }
