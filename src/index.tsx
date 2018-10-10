@@ -20,13 +20,13 @@ interface AppState {
 }
 
 enum Mode {
-  Encode = false,
-  Decode = true
+  Escape = false,
+  Unescape = true
 }
 
 class App extends React.Component<void, AppState> {
   state: AppState = {
-    mode: Mode.Encode,
+    mode: Mode.Escape,
     input: '',
     output: ''
   }
@@ -47,7 +47,7 @@ class App extends React.Component<void, AppState> {
               actions={
                 <UiTooltip text="Please enter an input" disabled={Boolean(this.state.input.length)}>
                   <UiButton onClick={this.handleFormat} disabled={!this.state.input.length}>
-                    {this.state.mode === Mode.Encode ? 'Escape' : 'Unescape'}
+                    {this.state.mode === Mode.Escape ? 'Escape' : 'Unescape'}
                   </UiButton>
                 </UiTooltip>
               }>
@@ -118,7 +118,7 @@ class App extends React.Component<void, AppState> {
   }
 
   getFormat(input: string) {
-    if (this.state.mode === Mode.Encode) {
+    if (this.state.mode === Mode.Escape) {
       return JSON.stringify(input).replace(/(^\")|(\"$)/g, '')
     }
 
