@@ -47,7 +47,7 @@ class App extends React.Component<void, AppState> {
               actions={
                 <UiTooltip text="Please enter an input" disabled={Boolean(this.state.input.length)}>
                   <UiButton onClick={this.handleFormat} disabled={!this.state.input.length}>
-                    {this.state.mode === Mode.Encode ? 'Encode' : 'Decode'}
+                    {this.state.mode === Mode.Encode ? 'Escape' : 'Unescape'}
                   </UiButton>
                 </UiTooltip>
               }>

@@ -58,8 +58,8 @@ export default class SharleenSwitchToggle extends React.Component<SharleenSwitch
   render() {
     return (
       <ui.Wrapper onClick={this.handleClick}>
-        <ui.Option>Encode</ui.Option>
-        <ui.Option>Decode</ui.Option>
+        <ui.Option>Escape</ui.Option>
+        <ui.Option>Unescape</ui.Option>
         <ui.Haptic translateX={this.props.value ? 0 : 90} />
       </ui.Wrapper>
     )
