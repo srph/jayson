@@ -1,8 +1,10 @@
 import * as React from 'react'
 import styled, { keyframes } from 'styled-components'
 import s from './styles'
-import * as copy from 'copy-text-to-clipboard'
+import copy from 'copy-text-to-clipboard'
 import UiButton from './UiButton'
+
+console.log(copy)
 
 interface CopyButtonProps {
   value: string
