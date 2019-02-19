@@ -4,8 +4,6 @@ import s from './styles'
 import copy from 'copy-text-to-clipboard'
 import UiButton from './UiButton'
 
-console.log(copy)
-
 interface CopyButtonProps {
   value: string
   entity: string
