@@ -38,7 +38,7 @@ class App extends React.Component<{}, AppState> {
       <UiContainer>
         <UiHeader>Jayson</UiHeader>
 
-        <SharleenSwitchToggle value={this.state.mode === Mode.Escape} onChange={this.handleModeChange} />
+        <SharleenSwitchToggle value={this.state.mode !== Mode.Escape} onChange={this.handleModeChange} />
 
         {!this.state.output.length && (
           <UiTransitionFadeIn>

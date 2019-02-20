@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 import styled, { keyframes } from 'styled-components'
 import s from './styles'
 import copy = require('copy-text-to-clipboard');
