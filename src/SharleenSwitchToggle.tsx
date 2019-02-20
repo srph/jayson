@@ -1,5 +1,5 @@
 import * as React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import s from './styles'
 
 const ui = {} as any
@@ -22,6 +22,10 @@ ui.Wrapper = styled.button`
   &:hover, &:focus {
     box-shadow: 0 6px 8px rgba(0,0,0,0.3);
   }
+
+  ${(props: any) => props.value && css`
+    background: ${s['color-dark-silver']};
+  `}
 `
 ui.Option = styled.div`
   display: flex;
@@ -47,6 +51,10 @@ ui.Haptic = styled.div`
   border-radius: 18px;
   transform: ${(props: any) => `translateX(${props.translateX}px)`};
   transition: 400ms all cubic-bezier(0, 0, 0, 1);
+
+  ${(props: any) => props.value && css`
+    background: ${s['color-silver']};
+  `}
 `
 
 interface SharleenSwitchToggleProps {
@@ -57,10 +65,10 @@ interface SharleenSwitchToggleProps {
 class SharleenSwitchToggle extends React.Component<SharleenSwitchToggleProps, {}> {
   render() {
     return (
-      <ui.Wrapper onClick={this.handleClick}>
+      <ui.Wrapper value={this.props.value} onClick={this.handleClick}>
         <ui.Option>Escape</ui.Option>
         <ui.Option>Unescape</ui.Option>
-        <ui.Haptic translateX={this.props.value ? 0 : 90} />
+        <ui.Haptic value={this.props.value} translateX={this.props.value ? 0 : 90} />
       </ui.Wrapper>
     )
   }
