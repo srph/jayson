@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import s from './styles'
 
-const ui = {}
+const ui = {} as any
 ui.Wrapper = styled.button`
   position: relative;
   display: flex;
@@ -45,7 +45,7 @@ ui.Haptic = styled.div`
   width: 96px;
   background: ${s['color-sky-blue']};
   border-radius: 18px;
-  transform: ${props => `translateX(${props.translateX}px)`};
+  transform: ${(props: any) => `translateX(${props.translateX}px)`};
   transition: 400ms all cubic-bezier(0, 0, 0, 1);
 `
 
@@ -54,7 +54,7 @@ interface SharleenSwitchToggleProps {
   onChange: (value: boolean) => void
 }
 
-export default class SharleenSwitchToggle extends React.Component<SharleenSwitchToggleProps, void> {
+class SharleenSwitchToggle extends React.Component<SharleenSwitchToggleProps, {}> {
   render() {
     return (
       <ui.Wrapper onClick={this.handleClick}>
@@ -69,3 +69,5 @@ export default class SharleenSwitchToggle extends React.Component<SharleenSwitch
     this.props.onChange(!this.props.value)
   }
 }
+
+export default SharleenSwitchToggle

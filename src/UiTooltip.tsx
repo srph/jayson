@@ -1,14 +1,13 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import s from './styles'
 import Position from './Position'
 
-const ui = {}
+const ui = {} as any
 ui.Wrapper = styled.div`
   position: absolute;
-  top: ${props => props.top}px;
-  left: ${props => props.left}px;
+  top: ${(props: any) => props.top}px;
+  left: ${(props: any) => props.left}px;
   margin-right: 16px;
   padding: 8px;
   font-size: 10px;
@@ -56,8 +55,6 @@ export default class UiTooltip extends React.Component<UiTooltipProps, UiTooltip
   target: HTMLElement
 
   render() {
-    const { top, left } = this.state
-
     return (
       <div style={{ position: 'relative' }}>
         <ui.Trigger
@@ -69,7 +66,7 @@ export default class UiTooltip extends React.Component<UiTooltipProps, UiTooltip
 
         {!this.props.disabled &&
           this.state.isActive && (
-            <Position offset={16} placement="left" target={() => this.target}>
+            <Position offset={16} target={() => this.target}>
               {({ top, left }) => (
                 <ui.Wrapper top={top} left={left}>
                   {this.props.text} <ui.Arrow />

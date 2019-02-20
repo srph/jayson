@@ -10,20 +10,20 @@ import * as utils from './utils'
 
 interface UiCodeEditorProps {
   value: string
-  autodetectLanguage: boolean
+  autodetectLanguage?: boolean
   autoFocus?: boolean
   onAutoFormat?: (value: string) => void
   onChange?: (value: string) => void
-  onPaste?: () => void
+  onPaste?: (input: string) => void
   innerRef?: (c: JSX.Element) => any
 }
 
-const ui = {}
+const ui = {} as any
 ui.Wrapper = styled.div`
   font-family: ${s['font-family-monospace']};
 `
 
-class UiCodeEditor extends React.Component<UiCodeEditorProps, void> {
+class UiCodeEditor extends React.Component<UiCodeEditorProps, {}> {
   static defaultProps = {
     autodetectLanguage: true
   }

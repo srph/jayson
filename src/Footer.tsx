@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import s from './styles'
 
-const ui = {}
+const ui = {} as any
 ui.Wrapper = styled.div`
   margin-top: 48px;
   font-family: ${s['font-family']};
@@ -23,10 +23,12 @@ export default function UiFooter() {
       Made with 💖 by{' '}
       <a href="https://kierb.com" target="_blank">
         Kier Borromeo
-      </a>. View{' '}
+      </a>
+      . View{' '}
       <a href="https://github.com/srph/jayson" target="_blank">
         source code
-      </a>.
+      </a>
+      .
     </ui.Wrapper>
   )
 }

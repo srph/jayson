@@ -12,12 +12,12 @@ interface UiFieldProps {
   wrapperRef?: (c: JSX.Element) => void
 }
 
-const ui = {}
+const ui = {} as any
 ui.Field = styled.div`
   margin-bottom: 48px;
   transition: 250ms all ease;
 
-  ${props =>
+  ${(props: any) =>
     props.disabled &&
     css`
     opacity: 0.5;

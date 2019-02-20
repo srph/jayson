@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "outDir": "build/dist",
-    "module": "esnext",
+    "module": "commonjs",
     "target": "es5",
-    "lib": ["es6", "dom"],
+    "lib": ["es7", "dom"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -12,10 +12,22 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
     "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "baseUrl": ".",
+    "preserveConstEnums": true,
+    "paths": {
+      "@app/*": [
+        "src/*"
+      ]
+    },
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",

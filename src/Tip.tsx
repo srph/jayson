@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import s from './styles'
 
-const ui = {}
+const ui = {} as any
 ui.Wrapper = styled.div`
   margin-top: 32px;
   font-size: 12px;
@@ -34,7 +34,7 @@ interface TipState {
 
 const tips = ['Better done than perfect.', "Don't forget to take a short break every now and then."]
 
-export default class Tip extends React.Component<void, TipState> {
+export default class Tip extends React.Component<{}, TipState> {
   state: TipState = {
     activeTip: this.getRandomTip()
   }

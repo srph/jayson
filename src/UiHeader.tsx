@@ -6,7 +6,7 @@ interface UiHeaderProps {
   children: string
 }
 
-const ui = {}
+const ui = {} as any
 ui.Wrapper = styled.div`
   display: flex;
   align-items: center;

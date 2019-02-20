@@ -14,17 +14,17 @@ import SharleenSwitchToggle from './SharleenSwitchToggle'
 import UiTooltip from './UiTooltip'
 
 interface AppState {
-  mode: boolean
+  mode: string
   input: string
   output: string
 }
 
 enum Mode {
-  Escape = false,
-  Unescape = true
+  Escape = 'escape',
+  Unescape = 'unescape'
 }
 
-class App extends React.Component<void, AppState> {
+class App extends React.Component<{}, AppState> {
   state: AppState = {
     mode: Mode.Escape,
     input: '',
@@ -38,7 +38,7 @@ class App extends React.Component<void, AppState> {
       <UiContainer>
         <UiHeader>Jayson</UiHeader>
 
-        <SharleenSwitchToggle value={this.state.mode} onChange={this.handleModeChange} />
+        <SharleenSwitchToggle value={this.state.mode === Mode.Escape} onChange={this.handleModeChange} />
 
         {!this.state.output.length && (
           <UiTransitionFadeIn>
@@ -68,7 +68,7 @@ class App extends React.Component<void, AppState> {
                 <UiButton preset="clear" onClick={this.handleReset}>
                   Reset
                 </UiButton>,
-                <CopyButton text="Output" value={this.state.output}>
+                <CopyButton entity="Output" value={this.state.output}>
                   Copy
                 </CopyButton>
               ]}
@@ -92,7 +92,7 @@ class App extends React.Component<void, AppState> {
 
   handleModeChange = (mode: boolean) => {
     this.setState({
-      mode,
+      mode: mode ? Mode.Unescape : Mode.Escape,
       input: '',
       output: ''
     })

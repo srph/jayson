@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled, { css } from 'styled-components'
 import s from './styles'
 
-const ui = {}
+const ui = {} as any
 ui.Button = styled.button`
   display: inline-block;
   height: 26px;
@@ -27,7 +27,7 @@ ui.Button = styled.button`
     cursor: not-allowed;
   }
 
-  ${props =>
+  ${(props: any) =>
     props.preset !== 'clear' &&
     css`
     &:not(:disabled):hover,
@@ -37,14 +37,14 @@ ui.Button = styled.button`
     }
   `}
 
-  ${props =>
+  ${(props: any) =>
     props.preset === 'clear' &&
     css`
     border: 0;
     box-shadow: initial;
   `}
 
-  ${props =>
+  ${(props: any) =>
     props.preset === 'primary' &&
     css`
     color: ${s['color-white']};
@@ -52,11 +52,12 @@ ui.Button = styled.button`
   `}
 `
 
-interface UiButtonProps {
-  preset: 'clear' | 'primary' | ''
-  disabled?: boolean
+interface OwnProps {
+  preset?: 'clear' | 'primary' | ''
 }
 
-export default function UiButton(props: any) {
+type CombinedProps = React.ButtonHTMLAttributes<HTMLButtonElement> & OwnProps
+
+export default function UiButton(props: CombinedProps) {
   return <ui.Button {...props} />
 }

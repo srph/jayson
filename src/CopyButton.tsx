@@ -1,7 +1,7 @@
-import * as React from 'react'
+import * as React from 'react';
 import styled, { keyframes } from 'styled-components'
 import s from './styles'
-import copy from 'copy-text-to-clipboard'
+import copy = require('copy-text-to-clipboard');
 import UiButton from './UiButton'
 
 interface CopyButtonProps {
@@ -14,7 +14,7 @@ interface CopyButtonState {
   show: boolean
 }
 
-const kf = {}
+const kf = {} as any
 kf.Floatee = keyframes`
   0% {
     transform: translateY(-8px) translateX(-50%);
@@ -28,7 +28,7 @@ kf.Floatee = keyframes`
   }
 `
 
-const ui = {}
+const ui = {} as any
 ui.Copy = styled.span`
   position: relative;
 `
@@ -71,9 +71,11 @@ export default class CopyButton extends React.Component<CopyButtonProps, CopyBut
         show: false
       },
       () => {
-        clearTimeout(this.timeout)
+        window.clearTimeout(this.timeout)
+        
         this.setState({ show: true })
-        this.timeout = setTimeout(() => {
+
+        this.timeout = window.setTimeout(() => {
           this.setState({
             show: false
           })
